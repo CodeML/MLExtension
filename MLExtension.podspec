@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "MLExtension"
-  spec.version      = "0.0.2"
+  spec.version      = "0.0.1"
   spec.author       = { "CoderML" => "weiminglei1990@163.com" }
   spec.homepage     = "https://github.com/CodeML/MLExtension"
   spec.summary      = "Category"
