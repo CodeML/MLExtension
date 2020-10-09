@@ -6,10 +6,11 @@
 //  Copyright © 2019 cassim. All rights reserved.
 //
 
-#import "NSArray+KMExtension.h"
+#import "NSArray+MLExtension.h"
+#import "NSDictionary+MLExtension.h"
 #import <MJExtension/MJExtension.h>
 
-@implementation NSArray (KMExtension)
+@implementation NSArray (MLExtension)
 - (NSMutableArray *)toModelArray {
     
     NSDictionary *dict = self.firstObject;

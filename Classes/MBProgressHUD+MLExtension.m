@@ -7,6 +7,7 @@
 //
 
 #import "MBProgressHUD+MLExtension.h"
+#import "UIColor+MLExtension.h"
 
 @implementation MBProgressHUD (MLExtension)
 

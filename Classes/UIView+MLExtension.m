@@ -1,16 +1,16 @@
 //
-//  UIView+KMViewFrame.m
+//  UIView+MLExtension.m
 //  KMAirTicket
 //
 //  Created by apple on 2019/5/7.
 //  Copyright © 2019 cassim. All rights reserved.
 //
 
-#import "UIView+KMViewFrame.h"
-#import "UIColor+Extension.h"
+#import "UIView+MLExtension.h"
+#import "UIColor+MLExtension.h"
 #import <objc/runtime.h>
 
-@implementation UIView (KMViewFrame)
+@implementation UIView (MLExtension)
 
 - (void)setParma:(NSDictionary *)parma {
     objc_setAssociatedObject(self, @selector(parma), parma, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -184,7 +184,7 @@
     self.layer.shadowRadius = 3;
     self.layer.shadowOffset = CGSizeMake(0, 3);
     self.layer.masksToBounds = false;
-    self.layer.cornerRadius = MARGIN_S;
+    self.layer.cornerRadius = 5;
 }
 
 - (void)deleteShadow {

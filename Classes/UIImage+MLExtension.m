@@ -6,9 +6,9 @@
 //  Copyright © 2018 90000km. All rights reserved.
 //
 
-#import "UIImage+KMExtension.h"
+#import "UIImage+MLExtension.h"
 
-@implementation UIImage (KMExtension)
+@implementation UIImage (MLExtension)
 - (NSString *)toIconBase64 {
     NSData *data = [self compress:200 * 1024];
     NSString *str = [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];

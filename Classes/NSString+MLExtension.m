@@ -6,10 +6,11 @@
 //  Copyright © 2019 cassim. All rights reserved.
 //
 
-#import "NSString+KMExtension.h"
+#import "NSString+MLExtension.h"
+#import "NSDate+MLExtension.h"
 #import <CommonCrypto/CommonDigest.h>
 
-@implementation NSString (KMExtension)
+@implementation NSString (MLExtension)
 
 - (NSString *)md5 {
     const char *cStr = self.UTF8String;

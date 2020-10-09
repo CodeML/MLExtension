@@ -1,14 +1,14 @@
 //
-//  UIColor+Extension.m
+//  UIColor+MLExtension.m
 //  iKnowschool
 //
 //  Created by apple on 2019/5/13.
 //  Copyright © 2019 cassim. All rights reserved.
 //
 
-#import "UIColor+Extension.h"
+#import "UIColor+MLExtension.h"
 
-@implementation UIColor (Extension)
+@implementation UIColor (MLExtension)
 //获取16进制颜色的方法
 + (UIColor *)hex:(NSString *)hexStr {
     hexStr = [hexStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];

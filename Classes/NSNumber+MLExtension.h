@@ -1,5 +1,5 @@
 //
-//  NSNumber+KMToString.h
+//  NSNumber+MLExtension.h
 //  KMAirTicket
 //
 //  Created by apple on 2019/5/7.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSNumber (KMToString)
+@interface NSNumber (MLExtension)
 - (NSString *)toString;
 @end
 

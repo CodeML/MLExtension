@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class MLBaseModel, MLBaseCellModel;
-@interface NSDictionary (KMExtension)
+@interface NSDictionary (MLExtension)
 - (NSString *)toRequest;
 - (NSString *)toString;
 - (MLBaseCellModel *)toModel;

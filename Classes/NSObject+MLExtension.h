@@ -1,5 +1,5 @@
 //
-//  NSObject+KMRuntime.h
+//  NSObject+MLExtension.h
 //  KMAirTicket
 //
 //  Created by apple on 2019/5/7.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSObject (KMRuntime)
+@interface NSObject (MLExtension)
 @property (nonatomic, readonly, strong) NSArray *propertyArray;
 @property (nonatomic, readonly, copy) NSString *className;
 

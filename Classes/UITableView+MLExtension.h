@@ -1,5 +1,5 @@
 //
-//  UITableView+Extension.h
+//  UITableView+MLExtension.h
 //  iKnowschool
 //
 //  Created by apple on 2019/5/23.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UITableView (Extension)
+@interface UITableView (MLExtension)
 - (void)scrollToBottom:(NSInteger)count;
 - (void)scrollToBottom:(NSInteger)count animated:(BOOL)animated;
 @end

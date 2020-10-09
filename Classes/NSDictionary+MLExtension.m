@@ -6,10 +6,10 @@
 //  Copyright © 2019 cassim. All rights reserved.
 //
 
-#import "NSDictionary+KMExtension.h"
+#import "NSDictionary+MLExtension.h"
 #import <MJExtension/MJExtension.h>
 
-@implementation NSDictionary (KMExtension)
+@implementation NSDictionary (MLExtension)
 - (MLBaseModel *)toModel:(NSString *)modelName {
     return [NSClassFromString(modelName) mj_objectWithKeyValues:self];
 }

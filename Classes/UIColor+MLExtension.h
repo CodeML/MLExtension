@@ -1,5 +1,5 @@
 //
-//  UIColor+Extension.h
+//  UIColor+MLExtension.h
 //  iKnowschool
 //
 //  Created by apple on 2019/5/13.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIColor (Extension)
+@interface UIColor (MLExtension)
 + (UIColor *)backClolor;
 + (UIColor *)shadowColor;
 + (UIColor *)lineColor;

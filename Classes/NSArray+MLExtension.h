@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSArray (KMExtension)
+@interface NSArray (MLExtension)
 - (NSMutableArray *)toModelArray;
 - (NSMutableArray *)toModelArr:(NSString *)modelName;
 

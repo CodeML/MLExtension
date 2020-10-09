@@ -1,14 +1,14 @@
 //
-//  UILabel+Extension.m
+//  UILabel+MLExtension.m
 //  iKnowschool
 //
 //  Created by apple on 2019/10/23.
 //  Copyright © 2019 cassim. All rights reserved.
 //
 
-#import "UILabel+Extension.h"
+#import "UILabel+MLExtension.h"
 
-@implementation UILabel (Extension)
+@implementation UILabel (MLExtension)
 - (void)setTextLineSpacing:(CGFloat)lineSpacing {
     
     if (!self.text || lineSpacing < 0.01) return;

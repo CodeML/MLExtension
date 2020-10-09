@@ -1,5 +1,5 @@
 //
-//  UIBarButtonItem+Extension.h
+//  UIBarButtonItem+MLExtension.h
 //  iKnowschool
 //
 //  Created by apple on 2019/5/6.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIBarButtonItem (Extension)
+@interface UIBarButtonItem (MLExtension)
 + (instancetype)itemWithIcon:(NSString *)url target:(id)target action:(SEL)action;
 
 + (instancetype)itemWithTitle:(NSString *)title target:(id)target action:(SEL)action;

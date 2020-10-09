@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSDateComponents (KMExtension)
+@interface NSDateComponents (MLExtension)
 - (NSDate *)toDate;
 - (NSString *)toString;
 - (NSString *)toStringWithFormat:(NSString *)format;

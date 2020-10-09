@@ -1,5 +1,5 @@
 //
-//  UILabel+Extension.h
+//  UILabel+MLExtension.h
 //  iKnowschool
 //
 //  Created by apple on 2019/10/23.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UILabel (Extension)
+@interface UILabel (MLExtension)
 - (void)setTextLineSpacing:(CGFloat)lineSpacing;
 @end
 

@@ -1,14 +1,14 @@
 //
-//  UITableView+Extension.m
+//  UITableView+MLExtension.m
 //  iKnowschool
 //
 //  Created by apple on 2019/5/23.
 //  Copyright © 2019 cassim. All rights reserved.
 //
 
-#import "UITableView+Extension.h"
+#import "UITableView+MLExtension.h"
 
-@implementation UITableView (Extension)
+@implementation UITableView (MLExtension)
 - (void)scrollToBottom:(NSInteger)count {
     NSIndexPath *lastIndex = [NSIndexPath indexPathForRow:count - 1 inSection:0];
     [self scrollToRowAtIndexPath:lastIndex atScrollPosition:UITableViewScrollPositionTop animated:NO];

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSString (KMExtension)
+@interface NSString (MLExtension)
    //去除表情规则
     //  \u0020-\\u007E  标点符号，大小写字母，数字
     //  \u00A0-\\u00BE  特殊标点  (¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾)

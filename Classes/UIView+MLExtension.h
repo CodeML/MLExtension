@@ -1,5 +1,5 @@
 //
-//  UIView+KMViewFrame.h
+//  UIView+MLExtension.h
 //  KMAirTicket
 //
 //  Created by apple on 2019/5/7.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIView (KMViewFrame)
+@interface UIView (MLExtension)
 @property (nonatomic, assign) CGFloat left_ml;
 @property (nonatomic, assign) CGFloat right_ml;
 @property (nonatomic, assign) CGFloat top_ml;

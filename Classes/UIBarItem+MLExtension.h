@@ -1,5 +1,5 @@
 //
-//  UIBarItem+Extension.h
+//  UIBarItem+MLExtension.h
 //  iKnowschool
 //
 //  Created by apple on 2019/10/18.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIBarItem (Extension)
+@interface UIBarItem (MLExtension)
 @property (nonatomic, weak, readonly) UIView *view_ml;
 
 @end

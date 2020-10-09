@@ -1,5 +1,5 @@
 //
-//  UIImageView+Extension.h
+//  UIImageView+MLExtension.h
 //  iKnowschool
 //
 //  Created by apple on 2019/5/21.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIImageView (Extension)
+@interface UIImageView (MLExtension)
 - (instancetype)toCircle;
 + (instancetype)dottedLine:(CGRect)frame;
 + (instancetype)dottedLine:(CGRect)frame lineColor:(UIColor *)color;

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIImage (KMExtension)
+@interface UIImage (MLExtension)
 - (NSString *)toBase64;
 - (NSString *)toIconBase64;
 

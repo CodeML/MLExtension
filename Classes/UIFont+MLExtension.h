@@ -1,5 +1,5 @@
 //
-//  UIFont+Extension.h
+//  UIFont+MLExtension.h
 //  iKnowschool
 //
 //  Created by apple on 2019/6/13.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIFont (Extension)
+@interface UIFont (MLExtension)
 + (UIFont *)FONT20;
 + (UIFont *)FONT18;
 + (UIFont *)FONT16;

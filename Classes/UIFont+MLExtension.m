@@ -1,14 +1,14 @@
 //
-//  UIFont+Extension.m
+//  UIFont+MLExtension.m
 //  iKnowschool
 //
 //  Created by apple on 2019/6/13.
 //  Copyright © 2019 cassim. All rights reserved.
 //
 
-#import "UIFont+Extension.h"
+#import "UIFont+MLExtension.h"
 
-@implementation UIFont (Extension)
+@implementation UIFont (MLExtension)
 + (UIFont *)FONT10 {
     return [UIFont systemFontOfSize:10];
 }
