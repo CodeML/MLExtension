@@ -477,4 +477,22 @@
     [attrStr addAttribute:NSForegroundColorAttributeName value:color range:[self rangeOfString:str]];
     return attrStr;
 }
+
+
+- (NSAttributedString *)addImage:(NSString *)img size:(CGFloat)WH {
+    if (self.length == 0) {
+        return [NSAttributedString new];
+    }
+    
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:self];
+    
+    NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+    attch.image = [UIImage imageNamed:img];
+    attch.bounds = CGRectMake(0, -3, WH, WH);
+    
+    NSAttributedString *attrStr = [NSAttributedString attributedStringWithAttachment:attch];
+    
+    [attrStrM insertAttributedString:attrStr atIndex:self.length - 1];
+    return attrStrM;
+}
 @end

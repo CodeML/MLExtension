@@ -55,6 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)to64String;
 // 左右对其
 - (NSAttributedString *)toLRStr;
+- (NSAttributedString *)addImage:(NSString *)img size:(CGFloat)WH;
 - (NSString *)toLink;
 - (NSString *)toHTMLStr;
 - (NSString *)removeltgt;

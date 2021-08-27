@@ -71,7 +71,7 @@
 }
 
 + (UIColor *)mainRed {
-    return [UIColor hex:@"FA4747"];
+    return [UIColor hex:@"D73737"];
 }
 
 + (UIColor *)mainColor {
