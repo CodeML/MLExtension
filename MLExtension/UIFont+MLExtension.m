@@ -37,6 +37,10 @@
     return [UIFont boldSystemFontOfSize:20];
 }
 
++ (UIFont *)FONT28_B {
+    return [UIFont boldSystemFontOfSize:28];
+}
+
 + (UIFont *)FONT30_B {
     return [UIFont boldSystemFontOfSize:30];
 }
@@ -61,4 +65,21 @@
     return [UIFont boldSystemFontOfSize:10];
 }
 
++ (UIFont * _Nonnull (^)(CGFloat size, UIFontWeight weight))font {
+    return ^id(CGFloat size, UIFontWeight weight){
+        return [UIFont systemFontOfSize:size weight:weight];;
+    };
+}
+
++ (UIFont * _Nonnull (^)(CGFloat size))size {
+    return ^id(CGFloat size){
+        return [UIFont systemFontOfSize:size];
+    };
+}
+
++ (UIFont * _Nonnull (^)(CGFloat size))bold {
+    return ^id(CGFloat size){
+        return [UIFont boldSystemFontOfSize:size];
+    };
+}
 @end

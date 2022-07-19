@@ -31,7 +31,7 @@
     [[NSScanner scannerWithString:gs] scanHexInt:&g];
     [[NSScanner scannerWithString:bs] scanHexInt:&b];
     if ([hexStr length] == 8) {
-        range.location = 4;
+        range.location = 6;
         NSString *as = [hexStr substringWithRange:range];
         [[NSScanner scannerWithString:as] scanHexInt:&a];
     } else {
@@ -47,7 +47,7 @@
 }
 
 + (UIColor *)lineColor {
-    return [UIColor hex3:@"E6"];
+    return [UIColor hex3:@"E9"];
 }
 
 + (UIColor *)black3 {
@@ -62,28 +62,40 @@
     return [UIColor hex3:@"99"];
 }
 
++ (UIColor *)blackC {
+    return [UIColor hex3:@"CC"];
+}
+
 + (UIColor *)shadowColor {
-    return [UIColor colorWithWhite:0 alpha:.5f];
+    return [UIColor colorWithRed:159/255.0 green:131/255.0 blue:131/255.0 alpha:0.22];
+}
+
++ (UIColor *)coverColor {
+    return [UIColor colorWithWhite:0 alpha:0.6];
 }
 
 + (UIColor *)mainGreen {
-    return [UIColor hex:@"01BEC0"];
+    return [UIColor hex:@"00C692"];
 }
 
 + (UIColor *)mainRed {
     return [UIColor hex:@"D73737"];
 }
 
++ (UIColor *)mainYellow {
+    return [UIColor hex:@"FF9900"];
+}
+
 + (UIColor *)mainColor {
     return [UIColor hex:@"008A81"];
 }
 
-+ (UIColor *)linkClolor {
-    return [UIColor hex:@"5B6A91"];
++ (UIColor *)mainBlue {
+    return [UIColor hex:@"0A7AFF"];
 }
 
 + (UIColor *)backClolor {
-    return [UIColor hex:@"F3F4F8"];
+    return [UIColor hex:@"F3F6F9"];
 }
 
 + (UIColor *)changeColor {

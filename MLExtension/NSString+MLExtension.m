@@ -96,6 +96,17 @@
     return attrStr;
 }
 
+- (NSAttributedString *)htmlString {
+    
+    NSString *str = self;
+    str = [str stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
+    str = [str stringByReplacingOccurrencesOfString:@"&#39;" withString:@"'"];
+    str = [str stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithData:[[NSString stringWithFormat:@" %@", str] dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute :@(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
+    return attributedString;
+}
+
 - (NSString *)from:(NSString *)from to:(NSString *)to options:(NSStringCompareOptions)mask {
     NSString *oldStr = self.copy;
     if (from.length) {
@@ -158,6 +169,60 @@
     }
 }
 
+- (NSMutableAttributedString *)changeFont:(UIFont *)font rangeCount:(NSInteger)count {
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:self];
+    if (self.length < count) { return attrStrM; }
+    [attrStrM addAttribute:NSFontAttributeName value:font range:NSMakeRange(self.length - count, count)];
+    return attrStrM;
+}
+
+- (NSMutableAttributedString *)changeFont:(UIFont *)font range:(NSString *)range {
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:self];
+    if (!range) { return attrStrM; }
+    [attrStrM addAttribute:NSFontAttributeName value:font range:[self rangeOfString:range?:@""]];
+    return attrStrM;
+}
+
+- (NSMutableAttributedString *)changeFonts:(NSArray <UIFont *> *)fonts ranges:(NSArray <NSString *> *)ranges {
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:self];
+    if (fonts.count != ranges.count) {
+        return attrStrM;
+    }
+    for (int i = 0; i < fonts.count; i++) {
+        [attrStrM addAttribute:NSFontAttributeName value:fonts[i] range:[self rangeOfString:ranges[i]]];
+    }
+    return attrStrM;
+}
+
+- (NSMutableAttributedString *)changeColor:(UIColor *)color range:(NSString *)range {
+    
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:self];
+    if (!range) { return attrStrM; }
+    [attrStrM addAttribute:NSForegroundColorAttributeName value:color range:[self rangeOfString:range]];
+    return attrStrM;
+}
+
+- (NSMutableAttributedString *)changeColors:(NSArray <UIColor *> *)colors ranges:(NSArray <NSString *> *)ranges {
+    
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:self];
+    if (colors.count != ranges.count) {
+        return attrStrM;
+    }
+    for (int i = 0; i < colors.count; i++) {
+        [attrStrM addAttribute:NSForegroundColorAttributeName value:colors[i] range:[self rangeOfString:ranges[i]]];
+    }
+    return attrStrM;
+}
+
+- (NSMutableAttributedString *)changeColor:(UIColor *)color font:(UIFont *)font range:(NSString *)range {
+    
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:self];
+    if (!range) { return attrStrM; }
+    [attrStrM addAttribute:NSForegroundColorAttributeName value:color range:[self rangeOfString:range]];
+    [attrStrM addAttribute:NSFontAttributeName value:font range:[self rangeOfString:range?:@""]];
+    return attrStrM;
+}
+
 - (NSString *)toUTF8String {
     NSData *data = [[NSData alloc] initWithBase64EncodedString:self options:NSDataBase64DecodingIgnoreUnknownCharacters];
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -175,6 +240,13 @@
     NSDictionary *dic = @{NSParagraphStyleAttributeName : par, NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
     
     return [[NSAttributedString alloc] initWithString:self attributes:dic];
+}
+
+- (NSAttributedString *)addRedStar {
+    NSString *str = [NSString stringWithFormat:@"%@*", self];
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:str];
+    [attrStrM addAttribute:NSForegroundColorAttributeName value:UIColor.redColor range:[str rangeOfString:@"*"]];
+    return attrStrM;
 }
 
 ////通讯编码
@@ -230,7 +302,13 @@
 }
 
 - (NSDate *)toDate {
-    return [self toDateWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+    if ([self containsString:@":"] && [self containsString:@"-"]) {
+        return [self toDateWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+    }else if ([self containsString:@"-"]) {
+        return [self toDateWithFormat:@"yyyy-MM-dd"];
+    }else{
+        return NSDate.date;
+    }
 }
 
 - (NSDate *)toDateWithFormat:(NSString *)format {
@@ -257,6 +335,12 @@
 #pragma mark - matching
 - (BOOL)isURL {
     return [self containsString:@"https://"] || [self containsString:@"http://"];
+}
+
+- (BOOL)isEmail {
+      NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+      NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+      return [emailTest evaluateWithObject:self];
 }
 
 - (BOOL)isMobile {
@@ -362,8 +446,12 @@
     return isMatch;
 }
 
-- (NSString *)add:(NSInteger)value {
+- (NSString *)integerStringAdd:(NSInteger)value {
     return [NSString stringWithFormat:@"%li", self.integerValue + value];
+}
+
+- (NSString *)integerStringSub:(NSInteger)value {
+    return [NSString stringWithFormat:@"%li", self.integerValue - value];
 }
 
 //实现
@@ -478,8 +566,7 @@
     return attrStr;
 }
 
-
-- (NSAttributedString *)addImage:(NSString *)img size:(CGFloat)WH {
+- (NSAttributedString *)addImage:(UIImage *)img bounds:(CGRect)bounds index:(NSInteger)index {
     if (self.length == 0) {
         return [NSAttributedString new];
     }
@@ -487,12 +574,37 @@
     NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:self];
     
     NSTextAttachment *attch = [[NSTextAttachment alloc] init];
-    attch.image = [UIImage imageNamed:img];
-    attch.bounds = CGRectMake(0, -3, WH, WH);
+    attch.image = img;
+    attch.bounds = bounds;
     
     NSAttributedString *attrStr = [NSAttributedString attributedStringWithAttachment:attch];
     
-    [attrStrM insertAttributedString:attrStr atIndex:self.length - 1];
+    [attrStrM insertAttributedString:attrStr atIndex:index];
     return attrStrM;
+}
+
+- (NSAttributedString *)addImage:(NSString *)img size:(CGFloat)WH {
+    if (self.length == 0) {
+        return [NSAttributedString new];
+    }
+    return [self addImage:[UIImage imageNamed:img] bounds:CGRectMake(0, -3, WH, WH) index:self.length - 1];
+}
+
+- (NSString *)priceString {
+    return [[NSDecimalNumber decimalNumberWithString:self] priceString];
+}
+
+- (BOOL)isNotEmpty {
+    if (!self.length) {
+        return NO;
+    } else {
+        NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+        NSString *trimedString = [self stringByTrimmingCharactersInSet:set];
+        if(!trimedString.length) {
+            return NO;
+        } else {
+            return YES;
+        }
+    }
 }
 @end

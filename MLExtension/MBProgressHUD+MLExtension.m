@@ -8,10 +8,16 @@
 
 #import "MBProgressHUD+MLExtension.h"
 #import "UIColor+MLExtension.h"
+#import "UIFont+MLExtension.h"
 
 @implementation MBProgressHUD (MLExtension)
 
-+ (instancetype)show:(NSString *)text icon:(NSString *)icon view:(UIView *)view
++ (instancetype)show:(NSString *)text sub:(NSString *)subStr icon:(NSString *)icon view:(UIView *)view
+{
+    return [self show:text sub:subStr icon:icon view:view darkMode:YES];
+}
+
++ (instancetype)show:(NSString *)text sub:(NSString *)subStr icon:(NSString *)icon view:(UIView *)view darkMode:(BOOL)darkMode
 {
     __block UIView *v = view;
     __block MBProgressHUD *hud = nil;
@@ -20,15 +26,32 @@
             v = [[UIApplication sharedApplication].windows lastObject];
         
         hud = [MBProgressHUD showHUDAddedTo:v animated:YES];
-        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:icon]];
+        hud.contentColor = darkMode ? [UIColor whiteColor] : [UIColor blackColor];
+        
+        if (icon.length) {
+            hud.customView = [[UIImageView alloc] initWithImage:SCC_Image(icon)];
+        }
         hud.mode = MBProgressHUDModeCustomView;
-        hud.bezelView.backgroundColor = UIColor.blackColor;
-        hud.label.text = text;
-        hud.label.textColor = UIColor.whiteColor;
+        hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+        hud.bezelView.backgroundColor = darkMode ? SCC_HexAlpha(@"000000", 0.75) : SCC_Hex(@"FFFFFF");
+        
+        //标题
+        if (text.length) {
+            hud.label.text = text;
+            hud.label.numberOfLines = 0;
+            hud.label.font = UIFont.font(16, UIFontWeightSemibold);
+        }
+        
+        //子标题
+        if (subStr.length) {
+            hud.detailsLabel.text = subStr;
+            hud.detailsLabel.textColor = UIColor.whiteColor;
+            hud.detailsLabel.font = UIFont.size(16);
+        }
         
         hud.removeFromSuperViewOnHide = YES;
         
-        [hud hideAnimated:YES afterDelay:1.f];
+        [hud hideAnimated:YES afterDelay:1.5f];
     });
     return hud;
 }
@@ -40,7 +63,7 @@
 
 + (instancetype)showSuccess:(NSString *)success toView:(UIView *)view
 {
-    return [self show:success icon:@"success" view:view];
+    return [self show:success sub:nil icon:@"success" view:view];
 }
 
 + (instancetype)showError:(NSString *)error
@@ -49,7 +72,7 @@
 }
 
 + (instancetype)showError:(NSString *)error toView:(UIView *)view{
-    return [self show:error icon:@"error" view:view];
+    return [self show:error sub:nil icon:@"error" view:view];
 }
 
 + (instancetype)showMessage:(NSString *)message
@@ -66,7 +89,8 @@
             v = [[UIApplication sharedApplication].windows lastObject];
         }
         hud = [MBProgressHUD showHUDAddedTo:v animated:YES];
-        hud.bezelView.backgroundColor = UIColor.shadowColor;
+        hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+        hud.bezelView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.75];
         hud.label.text = message;
         hud.contentColor = UIColor.whiteColor;
         hud.removeFromSuperViewOnHide = YES;

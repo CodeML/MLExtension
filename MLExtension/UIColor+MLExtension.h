@@ -13,16 +13,19 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIColor (MLExtension)
 + (UIColor *)backClolor;
 + (UIColor *)shadowColor;
++ (UIColor *)coverColor;
 + (UIColor *)lineColor;
 + (UIColor *)mainColor;
 + (UIColor *)mainGreen;
 + (UIColor *)mainRed;
-+ (UIColor *)linkClolor;
++ (UIColor *)mainYellow;
++ (UIColor *)mainBlue;
 //渐变色
 + (UIColor *)changeColor;
 + (UIColor *)black3;
 + (UIColor *)black6;
 + (UIColor *)black9;
++ (UIColor *)blackC;
 + (UIColor *)hex:(NSString *)hexStr;
 + (UIColor *)hex3:(NSString *)hex;
 - (BOOL)isEqualColor:(UIColor *)color;

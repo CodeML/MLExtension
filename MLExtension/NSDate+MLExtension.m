@@ -27,13 +27,6 @@
     return date.toString;
 }
 
-// 获取当月的天数
-- (NSInteger)getNumberOfDaysInMonth {
-    NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay inUnit: NSCalendarUnitMonth forDate:self];
-    return range.length;
-}
-
 - (BOOL)isThisMonth {
     NSDateComponents *now = NSDate.date.components;
     NSDateComponents *date = self.components;
@@ -60,8 +53,12 @@
 }
 
 - (NSInteger)differenceDaysByNow {
+    return [self differenceDaysByDate:NSDate.date];
+}
+
+- (NSInteger)differenceDaysByDate:(NSDate *)date {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    return -[gregorian components:NSCalendarUnitDay fromDate:self toDate:NSDate.date  options:0].day;
+    return -[gregorian components:NSCalendarUnitDay fromDate:self toDate:date  options:0].day;
 }
 
 - (NSString *)toString {
@@ -110,4 +107,39 @@
 - (NSDate *)tomorrow {
     return [self dateByAddingTimeInterval:24 * 60 * 60];
 }
+
+- (NSDate *)dateAfterDays:(NSInteger)days {
+    return [self dateByAddingTimeInterval:24 * 60 * 60 * days];
+}
+
++ (NSString *)timeLeftFrom:(NSDate *)f to:(NSDate *)t {
+    unsigned int unitFlags = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    NSDateComponents *c = [NSCalendar.currentCalendar components:unitFlags fromDate:f toDate:t options:0];
+    return [c toStringWithFormat:@"mm:ss"];
+}
+
+- (NSString *)timeLeft {
+    return [NSDate timeLeftFrom:NSDate.date to:self];
+}
+
+- (NSString *)toSellCarString {
+    if ([self isToday]) {
+        return [self toStringWithFormat:@"今天 HH:mm"];
+    } else if ([[self dateAfterDays:-1] isToday]) {
+        return [self toStringWithFormat:@"明天 HH:mm"];
+    } else if ([[self dateAfterDays:-2] isToday]) {
+        return [self toStringWithFormat:@"后天 HH:mm"];
+    }
+    return [self toStringWithFormat:@"MM月dd日 HH:mm"];
+}
+
+- (BOOL)isEarlierThanCurrentDate
+{
+    NSDate *currentDate = [NSDate date];
+    if ([[self laterDate:currentDate] isEqualToDate:currentDate]) {
+        return YES;
+    }
+    return NO;
+}
+
 @end

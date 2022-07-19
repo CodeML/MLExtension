@@ -26,7 +26,6 @@
 }
 
 - (NSString *)className {
-    NSStringFromClass(self.class);
     return [NSString stringWithUTF8String:object_getClassName(self)];
 }
 

@@ -9,6 +9,13 @@
 #import "UIImageView+MLExtension.h"
 #import "UIView+MLExtension.h"
 #import "UIColor+MLExtension.h"
+#import "SCCRequestConfig.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <AVFoundation/AVAsset.h>
+#import <AVFoundation/AVAssetImageGenerator.h>
+#import <AVFoundation/AVTime.h>
+#import <SDWebImage/SDImageCache.h>
+#import "SccgWebSrv.h"
 
 @implementation UIImageView (MLExtension)
 - (instancetype)toCircle {
@@ -64,5 +71,55 @@
 - (void)stopAnimation:(UIImage *)hold {
     [self stopAnimating];
     self.image = hold;
+}
+
+- (void)setAvatarWithImageId:(NSString *)imageId {
+    NSString *urlStr = @"";
+    if ([imageId hasPrefix:@"http"]) {
+        urlStr = imageId;
+    }else{
+        [NSString stringWithFormat:@"%@file/%@", SCCRequestConfig.defaultDomainHost, imageId];
+    }
+    
+    [self sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"mine_default_icon"]];
+}
+
+- (void)setImageWithImageId:(NSString *)imageId {
+    NSString *urlStr = @"";
+    if ([imageId hasPrefix:@"http"]) {
+        urlStr = imageId;
+    }else{
+        [NSString stringWithFormat:@"%@file/%@", SCCRequestConfig.defaultDomainHost, imageId];
+    }
+    [self sd_setImageWithURL:[NSURL URLWithString:urlStr]];
+}
+
+- (void)setVideoFirstImageWithUrl:(NSString *)url {
+    [[SDImageCache sharedImageCache] queryCacheOperationForKey:url done:^(UIImage * _Nullable image, NSData * _Nullable data, SDImageCacheType cacheType) {
+         //是否有缓存图片
+        if(image){
+            self.image = image;
+        }else{
+            //获取视频第一帧
+            self.image = [self getVideoFirstViewImage:url];
+        }
+    }];
+}
+
+- (UIImage *)getVideoFirstViewImage:(NSString *)url {
+    
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[SccgWebSrv get_img_url:url] options:nil];
+    AVAssetImageGenerator *assetGen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    
+    assetGen.appliesPreferredTrackTransform = YES;
+    CMTime time = CMTimeMakeWithSeconds(0.0, 600);
+    NSError *error = nil;
+    CMTime actualTime;
+    CGImageRef image = [assetGen copyCGImageAtTime:time actualTime:&actualTime error:&error];
+    UIImage *videoImage = [[UIImage alloc] initWithCGImage:image];
+    CGImageRelease(image);
+    
+    [[SDImageCache sharedImageCache] storeImage:videoImage forKey:url toDisk:NO completion:^{}];
+    return videoImage;
 }
 @end

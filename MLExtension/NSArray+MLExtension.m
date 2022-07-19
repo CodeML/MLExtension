@@ -8,7 +8,7 @@
 
 #import "NSArray+MLExtension.h"
 #import "NSDictionary+MLExtension.h"
-#import <MJExtension/MJExtension.h>
+//#import <MJExtension/MJExtension.h>
 
 @implementation NSArray (MLExtension)
 - (NSMutableArray *)toModelArray {
@@ -22,7 +22,7 @@
 }
 
 - (NSMutableArray *)toModelArr:(NSString *)modelName {
-    return [NSClassFromString(modelName) mj_objectArrayWithKeyValuesArray:self];
+    return [NSArray modelArrayWithClass:NSClassFromString(modelName) json:self].mutableCopy;
 }
 
 - (NSString *)toString {
@@ -32,27 +32,26 @@
 
 - (NSString *)join:(NSString *)join {
     NSMutableString *strM = [NSMutableString stringWithString:@""];
-    if ([self.firstObject isKindOfClass:NSString.class]) {
-        // 字符串数组
-        for (NSInteger i = 0; i < self.count; i++) {
-            NSString *str = self[i];
-            [strM appendString:str];
-            if (i != self.count - 1) {
-                [strM appendString:join];
-            }
+    
+    for (NSInteger i = 0; i < self.count; i++) {
+        NSString *str = @"";
+        
+        if ([self.firstObject isKindOfClass:NSString.class]) {
+            // 字符串数组
+            str = self[i];
+        } else if ([self.firstObject isKindOfClass:NSDictionary.class]) {
+            // 字典数组
+            str = [(NSDictionary *)self[i] toString];
+        } else if ([self.firstObject isKindOfClass:NSArray.class]) {
+            // 数组嵌套
+            str = [(NSArray *)self[i] toString];
         }
-        return strM;
-    } else if ([self.firstObject isKindOfClass:NSDictionary.class]) {
-        // 字典数组
-        for (NSInteger i = 0; i < self.count; i++) {
-            NSString *str = [(NSDictionary *)self[i] toString];
-            [strM appendString:str];
-            if (i != self.count - 1) {
-                [strM appendString:join];
-            }
+        
+        [strM appendString:str];
+        if (i != self.count - 1) {
+            [strM appendString:join];
         }
-        return strM;
     }
-    return @"";
+    return strM;
 }
 @end

@@ -19,12 +19,27 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIFont *)FONT10;
 
 + (UIFont *)FONT30_B;
++ (UIFont *)FONT28_B;
 + (UIFont *)FONT20_B;
 + (UIFont *)FONT18_B;
 + (UIFont *)FONT16_B;
 + (UIFont *)FONT14_B;
 + (UIFont *)FONT12_B;
 + (UIFont *)FONT10_B;
+
++ (UIFont *(^)(CGFloat size, UIFontWeight weight)) font;
++ (UIFont *(^)(CGFloat size)) size;
++ (UIFont *(^)(CGFloat size)) bold;
+
+//UIKIT_EXTERN const UIFontWeight UIFontWeightUltraLight NS_AVAILABLE_IOS(8_2);
+//UIKIT_EXTERN const UIFontWeight UIFontWeightThin NS_AVAILABLE_IOS(8_2);
+//UIKIT_EXTERN const UIFontWeight UIFontWeightLight NS_AVAILABLE_IOS(8_2);
+//UIKIT_EXTERN const UIFontWeight UIFontWeightRegular NS_AVAILABLE_IOS(8_2);
+//UIKIT_EXTERN const UIFontWeight UIFontWeightMedium NS_AVAILABLE_IOS(8_2);
+//UIKIT_EXTERN const UIFontWeight UIFontWeightSemibold NS_AVAILABLE_IOS(8_2);
+//UIKIT_EXTERN const UIFontWeight UIFontWeightBold NS_AVAILABLE_IOS(8_2);
+//UIKIT_EXTERN const UIFontWeight UIFontWeightHeavy NS_AVAILABLE_IOS(8_2);
+//UIKIT_EXTERN const UIFontWeight UIFontWeightBlack NS_AVAILABLE_IOS(8_2);
 @end
 
 NS_ASSUME_NONNULL_END

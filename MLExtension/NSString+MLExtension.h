@@ -48,18 +48,31 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)includeChinese;
 // 中英文加系统九宫格
 - (BOOL)isEnglish_Chinese;
+/// 是否为邮箱
+- (BOOL)isEmail;
+/// 是否非空字符串
+- (BOOL)isNotEmpty;
 
 - (NSString *)md5;
-
+- (NSString *)priceString;
 - (NSString *)toUTF8String;
 - (NSString *)to64String;
 // 左右对其
 - (NSAttributedString *)toLRStr;
+- (NSAttributedString *)addRedStar;
+- (NSMutableAttributedString *)changeFont:(UIFont *)font rangeCount:(NSInteger)count;
+- (NSMutableAttributedString *)changeFont:(UIFont *)font range:(NSString *)range;
+- (NSMutableAttributedString *)changeFonts:(NSArray <UIFont *> *)fonts ranges:(NSArray <NSString *> *)ranges;
+- (NSMutableAttributedString *)changeColor:(UIColor *)color range:(NSString *)range;
+- (NSMutableAttributedString *)changeColors:(NSArray <UIColor *> *)colors ranges:(NSArray <NSString *> *)ranges;
+- (NSMutableAttributedString *)changeColor:(UIColor *)color font:(UIFont *)font range:(NSString *)range;
 - (NSAttributedString *)addImage:(NSString *)img size:(CGFloat)WH;
+- (NSAttributedString *)addImage:(UIImage *)img bounds:(CGRect)bounds index:(NSInteger)index;
 - (NSString *)toLink;
 - (NSString *)toHTMLStr;
 - (NSString *)removeltgt;
 - (NSAttributedString *)toLinkHtmlString;
+- (NSAttributedString *)htmlString;
 - (NSAttributedString *)colorString:(NSString *)str color:(UIColor *)color;
 
 - (NSString *)removeSpace;
@@ -79,7 +92,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)from:(NSString *)from to:(NSString *)to options:(NSStringCompareOptions)mask;
 - (NSString *)toDateString:(NSString *)format;
 + (NSString *)nowWithTimeInterval:(NSTimeInterval)oldTime;
-- (NSString *)add:(NSInteger)value;
+- (NSString *)integerStringAdd:(NSInteger)value;
+- (NSString *)integerStringSub:(NSInteger)value;
 - (NSTimeInterval)serverTimeToTimeInterval;
 - (NSInteger)compareVersion:(NSString *)version;
 

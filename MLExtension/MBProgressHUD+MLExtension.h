@@ -57,6 +57,16 @@
  */
 + (instancetype)showMessage:(NSString *)message toView:(UIView *)view;
 
+
+/// 显示弹框到视图
+/// @param text 标题文本
+/// @param subStr 详情文本
+/// @param icon 图标名
+/// @param view 显示到的视图
++ (instancetype)show:(NSString *)text sub:(NSString *)subStr icon:(NSString *)icon view:(UIView *)view;
+
++ (instancetype)show:(NSString *)text sub:(NSString *)subStr icon:(NSString *)icon view:(UIView *)view darkMode:(BOOL)darkMode;
+
 /**
  隐藏提示
  */
